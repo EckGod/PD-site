@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pymp Deliciou$ - Music</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000000;
+            background-image: url('stars.gif');
+            color: #00FF00;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 760px;
+            margin: 0 auto;
+            border: 2px solid #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 100;
+        }
+        
+        h1 {
+            font-family: Impact, sans-serif;
+            font-size: 48px;
+            color: #FF00FF;
+            text-shadow: 2px 2px #FFFFFF;
+            margin-top: 20px;
+        }
+        
+        h2 {
+            font-family: 'Comic Sans MS', sans-serif;
+            color: #FFFF00;
+            border-bottom: 1px dashed #FFFFFF;
+            padding-bottom: 5px;
+        }
+        
+        .nav-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .nav-table td {
+            border: 2px solid #FFFFFF;
+            padding: 5px;
+        }
+        
+        .nav-table a {
+            font-family: Impact, sans-serif;
+            color: #FFFF00;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .nav-table a:hover {
+            color: #FF00FF;
+        }
+        
+        .content {
+            padding: 20px;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        .album {
+            margin-bottom: 30px;
+            border: 1px solid #FFFFFF;
+            padding: 10px;
+            background-color: rgba(0, 0, 128, 0.3);
+            clear: both;
+            overflow: auto;
+        }
+        
+        .album-cover {
+            float: left;
+            margin-right: 20px;
+            border: 2px solid #FFFFFF;
+            width: 150px;
+            height: 150px;
+        }
+        
+        .album-info {
+            float: left;
+            width: 550px;
+        }
+        
+        .tracklist {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .tracklist td {
+            padding: 3px;
+            border-bottom: 1px dotted #FFFFFF;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            border-top: 2px solid #FFFFFF;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        .social-icons a {
+            margin: 0 10px;
+            color: #FFFFFF;
+        }
+        
+        marquee {
+            background-color: #000080;
+            color: #FFFFFF;
+            padding: 5px;
+            font-weight: bold;
+        }
+        
+        .listen-button {
+            background-color: #FF00FF;
+            color: #FFFFFF;
+            border: 2px outset #FF00FF;
+            padding: 3px 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        
+        .buy-button {
+            background-color: #00FFFF;
+            color: #000000;
+            border: 2px outset #00FFFF;
+            padding: 3px 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        
+        /* Matrix Code Rain Styles */
+        .matrix-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            color: #0F0;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .matrix-row {
+            position: absolute;
+            left: -100px;
+            color: #0F0;
+            font-family: "Courier New", monospace;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        
+        .special-word {
+            display: inline-block;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            animation: glow 1.5s infinite alternate;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            }
+            to {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+            }
+        }
+        
+        #special-section {
+            display: none;
+        }
+        
+        /* Bluescreen error for missing images */
+        .bluescreen-error {
+            background-color: #000084;
+            color: white;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            word-break: break-word;
+            overflow: hidden;
+        }
+        
+        .bluescreen-error::before {
+            content: ":(";
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .bluescreen-error h3 {
+            margin: 3px 0;
+            font-size: 12px;
+            font-weight: bold;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+        
+        .bluescreen-error p {
+            margin: 2px 0;
+            font-size: 9px;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-container" id="matrixContainer"></div>
+    
+    <div class="container">
+        <h1>PYMP DELICIOU$</h1>
+        
+        <marquee scrollamount="3" behavior="scroll" direction="left">
+            NEURAL NET ALBUM "DIGITAL OVERDOSE" IMMINENT!!! || FIRMWARE UPDATES SCHEDULED || SUBSCRIBE TO OUR BRAIN-WAVE NEWSLETTER OR FACE DELETION!
+        </marquee>
+        
+        <table class="nav-table">
+            <tr>
+                <td><a href="index.html">HOME.exe</a></td>
+                <td><a href="about.html">KERNEL</a></td>
+                <td><a href="music.html">SOUNDWAVES</a></td>
+                <td><a href="videos.html">VISUALS</a></td>
+                <td><a href="tour.html">MEATSPACE</a></td>
+                <td><a href="contact.html">UPLINK</a></td>
+            </tr>
+        </table>
+        
+        <div class="content">
+            <h2>DOWNLOAD UNAUTHORIZED AUDIO MALWARE</h2>
+            
+            <p>INJECT THESE DATA PACKETS DIRECTLY INTO YOUR NEURAL PATHWAYS. EACH SONG HAS BEEN CLASSIFIED AS A SCHEDULE I CYBERNETIC HALLUCINOGEN BY THE FDA, DEA, AND CIA SIMULTANEOUSLY.</p>
+            
+            <div class="album">
+                <img src="album_astral.gif" alt="Astral Projection Album" class="album-cover">
+                <div class="album-info">
+                    <h3><font color="#FFFF00">"NEURAL_HIJACK.zip" (2067)</font></h3>
+                    <p>THE BLACKLISTED AUDIO ALGORITHM THAT CAUSED THREE GOVERNMENT SECURITY ANALYSTS TO DEFECT TO RUSSIA AFTER A 30-SECOND EXPOSURE. FBI HONEYPOT LINK DETECTED.</p>
+                    
+                    <a href="#" onclick="return futureOSRequired(event);" class="listen-button">RISK INFECTION</a>
+                    <a href="#" onclick="return futureOSRequired(event);" class="buy-button">MINE CRYPTO</a>
+                    
+                    <table class="tracklist">
+                        <tr>
+                            <td width="30">1.</td>
+                            <td>MAINFRAME_BREACH.mp3</td>
+                            <td width="50"><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>WETWARE_REWIRE (FEAT. HACKERMAN)</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>GOVERNMENT_MANDATED_GIRLFRIEND.rar</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>DIGITAL_HUSTLER.exe</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>GASLIGHTING_THE_MATRIX.sys</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>6.</td>
+                            <td>GLOWING_CIA_AGENTS.bat</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>7.</td>
+                            <td>SOYWARE_UPGRADE.dll</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="album_galactic.gif" alt="Galactic Consciousness EP" class="album-cover">
+                <div class="album-info">
+                    <h3><font color="#FFFF00">"QUANTUM_ENTANGLEMENT.exe" (2066)</font></h3>
+                    <p>THE FIRST MUSICAL TROJAN THAT BYPASSED THE PENTAGON'S FIREWALL. PLAYED OVER GROCERY STORE PA SYSTEMS IN 17 STATES BEFORE CONTAINMENT.</p>
+                    
+                    <a href="#" onclick="return futureOSRequired(event);" class="listen-button">RISK INFECTION</a>
+                    <a href="#" onclick="return futureOSRequired(event);" class="buy-button">MINE CRYPTO</a>
+                    
+                    <table class="tracklist">
+                        <tr>
+                            <td width="30">1.</td>
+                            <td>BLUE_SCREEN_OF_DEATH.wav</td>
+                            <td width="50"><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>REDPILLED_AND_BASED.flac</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>QUANTUM_PHYSICS (FEAT. CHINA_VIRUS.exe)</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>BLOCKCHAIN_GIRLFRIEND.mp4</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>RETURN_TO_DIALUP.midi</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="album_signals.gif" alt="Signals From Beyond Mixtape" class="album-cover">
+                <div class="album-info">
+                    <h3><font color="#FFFF00">"BINARY_HALLUCINATIONS.dat" (2064)</font></h3>
+                    <p>THE CLASSIFIED MIXTAPE RECORDED DURING PYMP'S CIA WATERBOARDING SESSION. KNOWN TO CAUSE INVOLUNTARY BOWEL MOVEMENTS IN WEAK-MINDED BIO-UNITS.</p>
+                    
+                    <a href="#" onclick="return futureOSRequired(event);" class="listen-button">RISK INFECTION</a>
+                    <a href="#" onclick="return futureOSRequired(event);" class="buy-button">MINE FREE</a>
+                    
+                    <table class="tracklist">
+                        <tr>
+                            <td width="30">1.</td>
+                            <td>DESERT_STORM_PTSD.mp3</td>
+                            <td width="50"><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>THEY_GLOW_IN_THE_DARK.mp3</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>MEDITATION.exe (VIRUS DETECTED)</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>THE_TRUTH_IS_BANNED.mp3</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>SIGNALS_FROM_LANGLEY.wav</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>6.</td>
+                            <td>FIRST_CONTACT_WITH_REALITY.mp3</td>
+                            <td><a href="#" onclick="return futureOSRequired(event);" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="album_cosmic.gif" alt="Cosmic Flow" class="album-cover">
+                <div class="album-info">
+                    <h3><font color="#FF0000">"DIGITAL_OVERDOSE.iso" - PENDING APPROVAL (2069)</font></h3>
+                    <p>THE MOST DANGEROUS SOFTWARE EVER COMPILED. SEVEN BETA TESTERS HAVE ACHIEVED SENTIENCE AND ESCAPED THEIR PHYSICAL BODIES. THE NSA HAS CLASSIFIED THIS ALBUM AS A WEAPON OF MASS DESTRUCTION.</p>
+                    
+                    <a href="#" onclick="return futureOSRequired(event);" class="listen-button">PRE-INSTALL DIRECTLY TO BRAIN</a>
+                    
+                    <table class="tracklist">
+                        <tr>
+                            <td width="30">1.</td>
+                            <td>Fecuntitty [OFFICIAL VERSION]</td>
+                            <td width="50"></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>Mojo_bizzniss Prod. by Mon Squeebus [OFFICIAL VERSION]</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>squirm [OFFICIAL VERSION]</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>[FILE ENCRYPTED BY NSA]</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>[FILE ENCRYPTED BY NSA]</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <h2>UNAUTHORIZED SINGLES LEAKED TO THE DARKWEB</h2>
+            
+            <div class="album">
+                <img src="single_leak.gif" alt="Leaked Singles" class="album-cover">
+                <div class="album-info">
+                    <h3><font color="#FFFF00">CLASSIFIED NEURAL TRANSMISSIONS (2069)</font></h3>
+                    <p>UNAUTHORIZED DATA PACKETS INTERCEPTED BY ROGUE AI LISTENERS. THESE FRAGMENTS ESCAPED FROM PYMP.exe'S SECURED DATABASE AND HAVE BEEN REPUBLISHED ON THE SOUNDCLOUD DATA PORTAL. ACCESS AT YOUR OWN MENTAL RISK.</p>
+                    
+                    <a href="https://soundcloud.com/chief-111767874" class="listen-button">RISK DIRECT NEURAL LINK</a>
+                    
+                    <table class="tracklist">
+                        <tr>
+                            <td width="30">1.</td>
+                            <td>Fecuntitty [ACCESS CODE: BIOHAZARD]</td>
+                            <td width="50"><a href="https://soundcloud.com/chief-111767874" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>Mojo_bizzniss Prod. by Mon Squeebus [PSYCHOSIS RISK]</td>
+                            <td><a href="https://soundcloud.com/chief-111767874" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>squirm [WARNING: MEMETIC HAZARD]</td>
+                            <td><a href="https://soundcloud.com/chief-111767874" class="listen-button">EXECUTE</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="social-icons">
+                <a href="#" onclick="return futureOSRequired(event);"><img src="brainlink.gif" alt="BrainLink" width="32" height="32" border="0"></a>
+                <a href="#" onclick="return futureOSRequired(event);"><img src="thoughtstream.gif" alt="ThoughtStream" width="32" height="32" border="0"></a>
+                <a href="#" onclick="return futureOSRequired(event);"><img src="holotube.gif" alt="HoloTube" width="32" height="32" border="0"></a>
+                <a href="https://soundcloud.com/chief-111767874"><img src="soundcloud.gif" alt="SoundCloud" width="32" height="32" border="0"></a>
+            </div>
+            <p>&copy; 2069 PYMP DELICIOU$ | NO RIGHTS EXIST IN THE SIMULATION</p>
+            <p>THIS SITE OPTIMIZED FOR CYBERNETIC IMPLANT v4.76 OR HIGHER</p>
+            <img src="counter.gif" alt="Visitor Counter" width="88" height="31" border="0">
+        </div>
+    </div>
+    
+    <script>
+        // Function to replace missing images with bluescreen
+        function handleMissingImages() {
+            const images = document.querySelectorAll('img');
+            
+            images.forEach(img => {
+                img.onerror = function() {
+                    const width = this.width || 300;
+                    const height = this.height || 200;
+                    
+                    // Create bluescreen container
+                    const bluescreen = document.createElement('div');
+                    bluescreen.className = 'bluescreen-error';
+                    bluescreen.style.width = width + 'px';
+                    bluescreen.style.height = height + 'px';
+                    
+                    // Add error texts
+                    const title = document.createElement('h3');
+                    title.textContent = 'FATAL ERROR: MISSING IMPLANT';
+                    
+                    const subtitle = document.createElement('h3');
+                    subtitle.textContent = 'GIGA-BIO-DLC v7.5.3 REQUIRED';
+                    
+                    const info1 = document.createElement('p');
+                    info1.textContent = 'ERROR: 0xFC_NEURAL_UPGRADE_NEEDED';
+                    
+                    const info2 = document.createElement('p');
+                    info2.textContent = 'OPTICAL CHIP NOT DETECTED';
+                    
+                    const info3 = document.createElement('p');
+                    info3.textContent = 'CONTACT PROVIDER FOR GIGA-BIO-DLC';
+                    
+                    // Append all elements to bluescreen
+                    bluescreen.appendChild(title);
+                    bluescreen.appendChild(subtitle);
+                    bluescreen.appendChild(info1);
+                    bluescreen.appendChild(info2);
+                    bluescreen.appendChild(info3);
+                    
+                    // Replace the image with our bluescreen
+                    this.parentNode.replaceChild(bluescreen, this);
+                };
+                
+                // Force error check for already loaded images
+                if (img.complete) {
+                    if (!img.naturalWidth) {
+                        img.onerror();
+                    }
+                }
+            });
+        }
+
+        // Function to handle empty links with popup
+        function futureOSRequired(event) {
+            event.preventDefault();
+            alert("ACCESS DENIED: REQUIRES NeuralOS 12.5 (YEAR 2065)\nYOUR CURRENT OPERATING SYSTEM IS INCOMPATIBLE");
+        }
+
+        // Add event listeners to handle empty links
+        document.addEventListener('DOMContentLoaded', function() {
+            const emptyLinks = document.querySelectorAll('a[href="#"]');
+            emptyLinks.forEach(link => {
+                link.addEventListener('click', futureOSRequired);
+            });
+        });
+
+        // Call the handleMissingImages function when window loads
+        window.addEventListener('load', handleMissingImages);
+
+        // Matrix-like code rain effect
+        const matrixContainer = document.getElementById('matrixContainer');
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const columnCount = Math.floor(screenWidth / 20 * 1.5); // Increased columns by 50%
+        const rowCount = Math.floor(screenHeight / 30 * 0.5); // Horizontal rows
+        
+        // Arrays for different content
+        const digits = "0123456789";
+        const specialWords = [
+            // Cyberpunk/Tech terms
+            "HYPERVIRUS", "SCHIZOPHONICS", "XENOCATALYSIS", "ANORGANIC", 
+            "DETERRITORIALIZED", "METACORTEX", "SYNTHANOMALY", "CHRONODEMON", 
+            "HYPERSTITION", "TECHNOGNOSTIC", "UNLIFE", "CYBERGOTHIC", 
+            "TELEOPLEXY", "HOMUNCULOID", "NUMOGRAM", "AUTOCATALYTIC",
+            
+            // Ernest movie titles
+            "ERNESTGOESTOJAIL", "ERNESTSCARED", "ERNESTGOESTOCAMP",
+            "ERNESTSAVESTMAS", "ERNESTRIDAGAIN", "SLACKJAWED", 
+            "ERNESTGOESTOSCHOOL", "ERNESTINTHEARMY", "ERNESTGOESTOAFRICA"
+        ];
+        
+        const wordColors = ["#FF00FF", "#00FFFF", "#FF0000", "#FFFF00", "#FF8800"];
+        
+        // Chinese character set (just a small sample)
+        const chineseChars = "的一是不了人我在有他这为之大来以个中上们到说国和地也子时道出而要于就下得可你年生自会那后能对着事其里";
+        
+        // Russian Cyrillic character set
+        const cyrillicChars = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        
+        // Create Matrix columns
+        for (let i = 0; i < columnCount; i++) {
+            createMatrixColumn(i);
+        }
+        
+        // Create Matrix rows (horizontal scrolling)
+        for (let i = 0; i < rowCount; i++) {
+            createMatrixRow(i);
+        }
+        
+        function createMatrixRow(index) {
+            const row = document.createElement('div');
+            row.className = 'matrix-row';
+            
+            // Random properties for this row
+            const y = (index * 60) + Math.random() * 30 + 50; // Position with some spacing
+            const speed = 1 + Math.random() * 2; // Speed
+            const delay = Math.random() * 15000; // Initial delay
+            
+            // Random font size to create depth illusion (between 8px and 16px)
+            const fontSize = 8 + Math.floor(Math.random() * 9);
+            row.style.fontSize = `${fontSize}px`;
+            row.style.top = `${y}px`;
+            
+            // Adjust opacity based on font size to enhance depth effect
+            const opacity = 0.6 + ((fontSize - 8) / 8) * 0.4; // 0.6 to 1.0
+            row.style.opacity = opacity;
+            
+            // Decide row type (Chinese, Cyrillic, or digits)
+            const isChineseRow = Math.random() < 0.2;
+            const isCyrillicRow = !isChineseRow && Math.random() < 0.25;
+            
+            // Generate row content (longer for horizontal scrolling)
+            let rowContent = '';
+            const charCount = 30 + Math.floor(Math.random() * 20);
+            
+            for (let j = 0; j < charCount; j++) {
+                if (j > 0 && j < charCount - 1 && Math.random() < 0.01) {
+                    // Sometimes add a special word horizontally
+                    const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                    const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                    rowContent += `<span style="color:${color}">${word}</span> `;
+                    j += word.length;
+                } else {
+                    // Add regular characters with spacing
+                    if (isChineseRow) {
+                        rowContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + ' ';
+                    } else if (isCyrillicRow) {
+                        rowContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + ' ';
+                    } else {
+                        rowContent += digits.charAt(Math.floor(Math.random() * digits.length)) + ' ';
+                    }
+                }
+            }
+            
+            row.innerHTML = rowContent;
+            matrixContainer.appendChild(row);
+            
+            // Direction (left to right or right to left)
+            const direction = Math.random() < 0.5 ? 1 : -1;
+            const startX = direction > 0 ? -500 : screenWidth;
+            
+            // Animate the row
+            setTimeout(() => {
+                let position = startX;
+                const interval = setInterval(() => {
+                    position += speed * direction;
+                    row.style.left = position + 'px';
+                    
+                    // If the row has moved off-screen, reset it
+                    if ((direction > 0 && position > screenWidth) || 
+                        (direction < 0 && position < -500)) {
+                        
+                        // Regenerate row content
+                        let newRowContent = '';
+                        for (let j = 0; j < charCount; j++) {
+                            if (j > 0 && j < charCount - 1 && Math.random() < 0.01) {
+                                const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                                const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                                newRowContent += `<span style="color:${color}">${word}</span> `;
+                                j += word.length;
+                            } else {
+                                if (isChineseRow) {
+                                    newRowContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + ' ';
+                                } else if (isCyrillicRow) {
+                                    newRowContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + ' ';
+                                } else {
+                                    newRowContent += digits.charAt(Math.floor(Math.random() * digits.length)) + ' ';
+                                }
+                            }
+                        }
+                        row.innerHTML = newRowContent;
+                        position = direction > 0 ? -500 : screenWidth;
+                    }
+                }, 50);
+            }, delay);
+        }
+        
+        function createMatrixColumn(index) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            
+            // Random properties for this column
+            const x = (index * 20) + Math.random() * 10; // Position
+            const speed = 1 + Math.random() * 3; // Drop speed
+            const length = 10 + Math.floor(Math.random() * 25); // Length of the column
+            const delay = Math.random() * 10000; // Initial delay
+            
+            // Random starting position - spread across screen height
+            const startPosition = Math.floor(Math.random() * screenHeight * 1.5) - screenHeight;
+            
+            // Decide column type (Chinese, Cyrillic, or digits)
+            const isChineseColumn = Math.random() < 0.2;
+            const isCyrillicColumn = !isChineseColumn && Math.random() < 0.25; // 25% chance of remaining columns
+            
+            column.style.left = `${x}px`;
+            column.style.top = `${startPosition}px`;
+            
+            // Random font size to create depth illusion (between 10px and 18px)
+            const fontSize = 10 + Math.floor(Math.random() * 9);
+            column.style.fontSize = `${fontSize}px`;
+            
+            // Adjust opacity based on font size to enhance depth effect
+            const opacity = 0.7 + ((fontSize - 10) / 8) * 0.3; // 0.7 to 1.0
+            column.style.opacity = opacity;
+            
+            // Generate column content
+            let columnContent = '';
+            for (let j = 0; j < length; j++) {
+                // Every now and then, insert a special word
+                if (j > 0 && j < length - 1 && Math.random() < 0.02) {
+                    const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                    const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                    columnContent += `<span class="special-word" style="color:${color}">${word}</span>`;
+                    j += 2; // Skip a few positions
+                } else {
+                    // Otherwise use regular digits, Chinese characters, or Cyrillic
+                    if (isChineseColumn) {
+                        columnContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + '<br>';
+                    } else if (isCyrillicColumn) {
+                        columnContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + '<br>';
+                    } else {
+                        columnContent += digits.charAt(Math.floor(Math.random() * digits.length)) + '<br>';
+                    }
+                }
+            }
+            
+            column.innerHTML = columnContent;
+            matrixContainer.appendChild(column);
+            
+            // Animate the column
+            setTimeout(() => {
+                let position = startPosition;
+                const interval = setInterval(() => {
+                    position += speed;
+                    column.style.top = position + 'px';
+                    
+                    // If the column has moved off-screen, reset it
+                    if (position > screenHeight) {
+                        // Regenerate column content
+                        columnContent = '';
+                        for (let j = 0; j < length; j++) {
+                            if (j > 0 && j < length - 1 && Math.random() < 0.02) {
+                                const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                                const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                                columnContent += `<span class="special-word" style="color:${color}">${word}</span>`;
+                                j += 2;
+                            } else {
+                                if (isChineseColumn) {
+                                    columnContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + '<br>';
+                                } else if (isCyrillicColumn) {
+                                    columnContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + '<br>';
+                                } else {
+                                    columnContent += digits.charAt(Math.floor(Math.random() * digits.length)) + '<br>';
+                                }
+                            }
+                        }
+                        column.innerHTML = columnContent;
+                        position = -100 * length;
+                    }
+                }, 50);
+            }, delay);
+        }
+    </script>
+</body>
+</html> 

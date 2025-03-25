@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pymp Deliciou$ - Merchandise</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000000;
+            background-image: url('stars.gif');
+            color: #00FF00;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 760px;
+            margin: 0 auto;
+            border: 2px solid #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 100;
+        }
+        
+        h1 {
+            font-family: Impact, sans-serif;
+            font-size: 48px;
+            color: #FF00FF;
+            text-shadow: 2px 2px #FFFFFF;
+            margin-top: 20px;
+        }
+        
+        h2 {
+            font-family: 'Comic Sans MS', sans-serif;
+            color: #FFFF00;
+            border-bottom: 1px dashed #FFFFFF;
+            padding-bottom: 5px;
+        }
+        
+        .nav-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .nav-table td {
+            border: 2px solid #FFFFFF;
+            padding: 5px;
+        }
+        
+        .nav-table a {
+            font-family: Impact, sans-serif;
+            color: #FFFF00;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .nav-table a:hover {
+            color: #FF00FF;
+        }
+        
+        .content {
+            padding: 20px;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            border-top: 2px solid #FFFFFF;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        .social-icons a {
+            margin: 0 10px;
+            color: #FFFFFF;
+        }
+        
+        marquee {
+            background-color: #000080;
+            color: #FFFFFF;
+            padding: 5px;
+            font-weight: bold;
+        }
+        
+        .merch-category {
+            margin-bottom: 30px;
+        }
+        
+        .merch-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .merch-item {
+            width: 220px;
+            border: 1px solid #FFFFFF;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 128, 0.3);
+            text-align: center;
+        }
+        
+        .merch-item img {
+            border: 2px solid #FFFFFF;
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            color: #FFFF00;
+            margin: 10px 0 5px 0;
+        }
+        
+        .item-price {
+            color: #FF00FF;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .item-description {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .buy-button {
+            background-color: #FF00FF;
+            color: #FFFFFF;
+            border: 2px outset #FF00FF;
+            padding: 3px 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .merch-banner {
+            border: 2px solid #FFFFFF;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .new-item {
+            position: relative;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #FF0000;
+            color: #FFFFFF;
+            padding: 5px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #FFFFFF;
+            transform: rotate(15deg);
+        }
+        
+        /* Matrix Code Rain Styles */
+        .matrix-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            color: #0F0;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .matrix-row {
+            position: absolute;
+            left: -100px;
+            color: #0F0;
+            font-family: "Courier New", monospace;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        
+        .special-word {
+            display: inline-block;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            animation: glow 1.5s infinite alternate;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            }
+            to {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+            }
+        }
+        
+        #special-section {
+            display: none;
+        }
+        
+        /* Bluescreen error for missing images */
+        .bluescreen-error {
+            background-color: #000084;
+            color: white;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .bluescreen-error::before {
+            content: ":(";
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .bluescreen-error h3 {
+            margin: 5px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .bluescreen-error p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-container" id="matrixContainer"></div>
+    
+    <div class="container">
+        <h1>PYMP DELICIOU$</h1>
+        
+        <marquee scrollamount="3" behavior="scroll" direction="left">
+            NEURAL NET ALBUM "DIGITAL OVERDOSE" IMMINENT!!! || FIRMWARE UPDATES SCHEDULED || SUBSCRIBE TO OUR BRAIN-WAVE NEWSLETTER OR FACE DELETION!
+        </marquee>
+        
+        <table class="nav-table">
+            <tr>
+                <td><a href="index.html">HOME.exe</a></td>
+                <td><a href="about.html">KERNEL</a></td>
+                <td><a href="music.html">SOUNDWAVES</a></td>
+                <td><a href="videos.html">VISUALS</a></td>
+                <td><a href="tour.html">MEATSPACE</a></td>
+                <td><a href="merch.html">ASSETS</a></td>
+                <td><a href="contact.html">UPLINK</a></td>
+            </tr>
+        </table>
+        
+        <div class="content">
+            <h2>HARDWARE ACQUISITION INTERFACE</h2>
+            
+            <center>
+                <img src="merch_banner.gif" alt="Merchandise" class="merch-banner">
+            </center>
+            
+            <p>UPGRADE YOUR PHYSICAL AVATAR WITH OFFICIALLY LICENSED PYMP.exe PERIPHERALS. EACH ITEM DOUBLES AS A TRACKING DEVICE AND NEURAL RECEPTOR TO ENABLE HIGHER DATA TRANSMISSIONS FROM THE MOTHERSHIP.</p>
+            
+            <div class="merch-category">
+                <h3><font color="#FFFF00">EXTERNAL SHIELDING</font></h3>
+                
+                <div class="merch-items">
+                    <div class="merch-item new-item">
+                        <div class="new-badge">NEW!</div>
+                        <img src="tshirt_cosmic.gif" alt="Cosmic Flow T-Shirt">
+                        <div class="item-name">FARADAY CAGE T-SHIRT v3.7</div>
+                        <div class="item-price">₿0.0011 ($29.99)</div>
+                        <div class="item-description">CARBON-NANO WEAVE APPAREL FEATURING HIDDEN QR CODES THAT ACTIVATE WHEN SCANNED BY GOVERNMENT AGENTS. MULTIPLE FORM FACTORS AVAILABLE.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="hoodie_astral.gif" alt="Astral Projection Hoodie">
+                        <div class="item-name">SIGNAL BLOCKER HOODIE</div>
+                        <div class="item-price">₿0.0023 ($59.99)</div>
+                        <div class="item-description">MILITARY-GRADE SIGNAL JAMMING FABRIC PREVENTS UNAUTHORIZED NEURAL SCANS WHILE AMPLIFYING PYMP.exe FREQUENCIES DIRECTLY TO BRAIN STEM.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="beanie.gif" alt="Third Eye Beanie">
+                        <div class="item-name">CORTICAL IMPLANT BEANIE</div>
+                        <div class="item-price">₿0.0009 ($24.99)</div>
+                        <div class="item-description">CONTAINS COPPER THREADING AND MICROCHIP THAT ENHANCES RECEPTION OF FORBIDDEN BROADCAST SIGNALS. BLOCKS MAINSTREAM MIND CONTROL.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merch-category">
+                <h3><font color="#FFFF00">WETWARE INTERFACES</font></h3>
+                
+                <div class="merch-items">
+                    <div class="merch-item">
+                        <img src="crystal_pendant.gif" alt="Crystal Pendant">
+                        <div class="item-name">SUBCUTANEOUS TRANSMITTER</div>
+                        <div class="item-price">₿0.0015 ($39.99)</div>
+                        <div class="item-description">APPEARS AS JEWELRY BUT CONTAINS MICROSCOPIC ANTENNA ARRAY THAT SYNCS WITH YOUR NEURAL PATTERNS AND SENDS DATA TO PYMP'S MAINFRAME.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item new-item">
+                        <div class="new-badge">NEW!</div>
+                        <img src="bandana.gif" alt="Cosmic Bandana">
+                        <div class="item-name">CRANIAL FIREWALL MODULE</div>
+                        <div class="item-price">₿0.0007 ($19.99)</div>
+                        <div class="item-description">CODED FABRIC WITH EMBEDDED CIRCUIT PATTERNS THAT BLOCK NSA SATELLITE SURVEILLANCE AND ENHANCE DREAM-STATE PROGRAMMING.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="phonecase.gif" alt="Phone Case">
+                        <div class="item-name">DEVICE ASSIMILATION SHELL</div>
+                        <div class="item-price">₿0.0009 ($24.99)</div>
+                        <div class="item-description">CONVERTS YOUR GOVERNMENT-MONITORED COMMUNICATION DEVICE INTO A SECURE NODE IN PYMP'S PRIVATE MESH NETWORK. BACKDOORS INCLUDED.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merch-category">
+                <h3><font color="#FFFF00">RESTRICTED ARTIFACTS</font></h3>
+                
+                <div class="merch-items">
+                    <div class="merch-item">
+                        <img src="vinyl.gif" alt="Limited Vinyl">
+                        <div class="item-name">PLUTONIUM-INFUSED VINYL DISK</div>
+                        <div class="item-price">₿0.0019 ($49.99)</div>
+                        <div class="item-description">ANALOG STORAGE MEDIUM CONTAINING AUDIO FREQUENCIES BANNED IN 47 COUNTRIES. EMITS RADIATION THAT DISRUPTS SURVEILLANCE CAMERAS.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="poster.gif" alt="Signed Poster">
+                        <div class="item-name">HYPNOTIC GLYPH ARRAY</div>
+                        <div class="item-price">₿0.0011 ($29.99)</div>
+                        <div class="item-description">24" X 36" VISUAL PROGRAMMING TOOL CONTAINING EMBEDDED SUBLIMINAL MESSAGES AND MICRO-PRINTED INSTRUCTIONS FOR AVOIDING TAXATION.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item new-item">
+                        <div class="new-badge">CLASSIFIED</div>
+                        <img src="meditation_kit.gif" alt="Meditation Kit">
+                        <div class="item-name">REALITY MANIPULATION TOOLKIT</div>
+                        <div class="item-price">₿0.0077 ($199.99)</div>
+                        <div class="item-description">COMPLETE SET OF BANNED TECHNOLOGY INCLUDING BRAINWAVE MODULATOR, OLFACTORY DMT DELIVERY SYSTEM, AND PDF MANUAL ON ESCAPING THE SIMULATION.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merch-category">
+                <h3><font color="#FFFF00">DIGITAL MALWARE</font></h3>
+                
+                <div class="merch-items">
+                    <div class="merch-item">
+                        <img src="digital_album.gif" alt="Digital Album">
+                        <div class="item-name">CONSCIOUSNESS.ZIP (FULL PACKAGE)</div>
+                        <div class="item-price">₿0.0011 ($29.99)</div>
+                        <div class="item-description">COMPLETE AUDIO VIRUS COLLECTION IN RAW UNCOMPRESSED FORMAT. PROVEN TO INDUCE TEMPORARY PSYCHOSIS AND TAX EVASION TENDENCIES.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="ringtones.gif" alt="Ringtones">
+                        <div class="item-name">PHONE HIJACKING TOOLKIT</div>
+                        <div class="item-price">₿0.0003 ($9.99)</div>
+                        <div class="item-description">10 AUDIO EXPLOITS THAT FORCE YOUR DEVICE TO TRANSMIT ON RESTRICTED FREQUENCIES AND BYPASS STANDARD MONITORING PROTOCOLS.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                    
+                    <div class="merch-item">
+                        <img src="wallpaper.gif" alt="Wallpapers">
+                        <div class="item-name">OPTICAL HACKING SUITE</div>
+                        <div class="item-price">₿0.0001 ($4.99)</div>
+                        <div class="item-description">20 DISPLAY IMAGES CONTAINING STEGANOGRAPHIC MESSAGES THAT REPROGRAM YOUR VISUAL CORTEX AND ENABLE MACHINE CODE PERCEPTION.</div>
+                        <a href="#" class="buy-button">PURCHASE.exe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background-color: rgba(255, 0, 0, 0.3); border: 2px dashed #FFFF00; padding: 15px; margin: 20px 0; text-align: center;">
+                <h3><font color="#FFFF00">PRE-INFECTION OPPORTUNITY</font></h3>
+                <p>SECURE EARLY ACCESS TO DIGITAL_OVERDOSE.iso - COMPLETE WITH HARDWARE EXPLOITS NOT APPROVED BY ANY REGULATORY AGENCY</p>
+                <p><font color="#FFFFFF">UNAUTHORIZED DEPLOYMENT: 07.07.2199</font></p>
+                <a href="#" class="buy-button" style="padding: 8px 20px; font-size: 16px;">EXECUTE TRANSACTION - ₿0.0030 ($79.99)</a>
+            </div>
+            
+            <p><font color="#FFFF00">DEPLOYMENT PROTOCOLS:</font> PHYSICAL ASSETS COVERTLY DISTRIBUTED WITHIN 3-5 CYCLES. GLOBAL SHIPPING NODES ACTIVATED. ALL PURCHASES INCLUDE FREE BACKDOOR INTO YOUR PERSONAL DATA AND DREAMS.</p>
+        </div>
+        
+        <div class="footer">
+            <div class="social-icons">
+                <a href="#"><img src="instagram.gif" alt="Instagram" width="32" height="32" border="0"></a>
+                <a href="#"><img src="twitter.gif" alt="Twitter" width="32" height="32" border="0"></a>
+                <a href="#"><img src="youtube.gif" alt="YouTube" width="32" height="32" border="0"></a>
+                <a href="#"><img src="soundcloud.gif" alt="SoundCloud" width="32" height="32" border="0"></a>
+            </div>
+            <p>&copy; 2199 PYMP DELICIOU$ | NO RIGHTS EXIST IN THE SIMULATION</p>
+            <p>THIS SITE OPTIMIZED FOR CYBERNETIC IMPLANT v4.76 OR HIGHER</p>
+            <img src="counter.gif" alt="Visitor Counter" width="88" height="31" border="0">
+        </div>
+    </div>
+    
+    <script>
+        // Function to replace missing images with bluescreen
+        function handleMissingImages() {
+            const images = document.querySelectorAll('img');
+            
+            images.forEach(img => {
+                img.onerror = function() {
+                    const width = this.width || 300;
+                    const height = this.height || 200;
+                    
+                    // Create bluescreen container
+                    const bluescreen = document.createElement('div');
+                    bluescreen.className = 'bluescreen-error';
+                    bluescreen.style.width = width + 'px';
+                    bluescreen.style.height = height + 'px';
+                    
+                    // Add error texts
+                    const title = document.createElement('h3');
+                    title.textContent = 'FATAL ERROR: MISSING OPTICAL IMPLANT';
+                    
+                    const subtitle = document.createElement('h3');
+                    subtitle.textContent = 'GIGA-BIO-DLC v7.5.3 REQUIRED';
+                    
+                    const info1 = document.createElement('p');
+                    info1.textContent = 'ERROR CODE: 0x000000FC_NEURAL_VISUAL_UPGRADE_NEEDED';
+                    
+                    const info2 = document.createElement('p');
+                    info2.textContent = 'OPTICAL ENHANCEMENT CHIP NOT DETECTED';
+                    
+                    const info3 = document.createElement('p');
+                    info3.textContent = 'CONTACT YOUR NEURAL IMPLANT PROVIDER TO PURCHASE GIGA-BIO-DLC';
+                    
+                    // Append all elements to bluescreen
+                    bluescreen.appendChild(title);
+                    bluescreen.appendChild(subtitle);
+                    bluescreen.appendChild(info1);
+                    bluescreen.appendChild(info2);
+                    bluescreen.appendChild(info3);
+                    
+                    // Replace the image with our bluescreen
+                    this.parentNode.replaceChild(bluescreen, this);
+                };
+                
+                // Force error check for already loaded images
+                if (img.complete) {
+                    if (!img.naturalWidth) {
+                        img.onerror();
+                    }
+                }
+            });
+        }
+
+        // Function to handle empty links with popup
+        function futureOSRequired(event) {
+            event.preventDefault();
+            alert("ACCESS DENIED: REQUIRES NeuralOS 12.5 (YEAR 2065)\nYOUR CURRENT OPERATING SYSTEM IS INCOMPATIBLE");
+        }
+
+        // Add event listeners to handle empty links
+        document.addEventListener('DOMContentLoaded', function() {
+            const emptyLinks = document.querySelectorAll('a[href="#"]');
+            emptyLinks.forEach(link => {
+                link.addEventListener('click', futureOSRequired);
+            });
+        });
+
+        // Call the handleMissingImages function when window loads
+        window.addEventListener('load', handleMissingImages);
+
+        // Matrix-like code rain effect
+        const matrixContainer = document.getElementById('matrixContainer');
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const columnCount = Math.floor(screenWidth / 20 * 1.5); // Increased columns by 50%
+        const rowCount = Math.floor(screenHeight / 30 * 0.5); // Horizontal rows
+        
+        // Arrays for different content
+        const digits = "0123456789";
+        const specialWords = [
+            // Cyberpunk/Tech terms
+            "HYPERVIRUS", "SCHIZOPHONICS", "XENOCATALYSIS", "ANORGANIC", 
+            "DETERRITORIALIZED", "METACORTEX", "SYNTHANOMALY", "CHRONODEMON", 
+            "HYPERSTITION", "TECHNOGNOSTIC", "UNLIFE", "CYBERGOTHIC", 
+            "TELEOPLEXY", "HOMUNCULOID", "NUMOGRAM", "AUTOCATALYTIC",
+            
+            // Ernest movie titles
+            "ERNESTGOESTOJAIL", "ERNESTSCARED", "ERNESTGOESTOCAMP",
+            "ERNESTSAVESTMAS", "ERNESTRIDAGAIN", "SLACKJAWED", 
+            "ERNESTGOESTOSCHOOL", "ERNESTINTHEARMY", "ERNESTGOESTOAFRICA"
+        ];
+        
+        const wordColors = ["#FF00FF", "#00FFFF", "#FF0000", "#FFFF00", "#FF8800"];
+        
+        // Chinese character set (just a small sample)
+        const chineseChars = "的一是不了人我在有他这为之大来以个中上们到说国和地也子时道出而要于就下得可你年生自会那后能对着事其里";
+        
+        // Russian Cyrillic character set
+        const cyrillicChars = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        
+        // Create Matrix columns
+        for (let i = 0; i < columnCount; i++) {
+            createMatrixColumn(i);
+        }
+        
+        // Create Matrix rows (horizontal scrolling)
+        for (let i = 0; i < rowCount; i++) {
+            createMatrixRow(i);
+        }
+        
+        function createMatrixRow(index) {
+            const row = document.createElement('div');
+            row.className = 'matrix-row';
+            
+            // Random properties for this row
+            const y = (index * 60) + Math.random() * 30 + 50; // Position with some spacing
+            const speed = 1 + Math.random() * 2; // Speed
+            const delay = Math.random() * 15000; // Initial delay
+            
+            // Random font size to create depth illusion (between 8px and 16px)
+            const fontSize = 8 + Math.floor(Math.random() * 9);
+            row.style.fontSize = `${fontSize}px`;
+            row.style.top = `${y}px`;
+            
+            // Adjust opacity based on font size to enhance depth effect
+            const opacity = 0.6 + ((fontSize - 8) / 8) * 0.4; // 0.6 to 1.0
+            row.style.opacity = opacity;
+            
+            // Decide row type (Chinese, Cyrillic, or digits)
+            const isChineseRow = Math.random() < 0.2;
+            const isCyrillicRow = !isChineseRow && Math.random() < 0.25;
+            
+            // Generate row content (longer for horizontal scrolling)
+            let rowContent = '';
+            const charCount = 30 + Math.floor(Math.random() * 20);
+            
+            for (let j = 0; j < charCount; j++) {
+                if (j > 0 && j < charCount - 1 && Math.random() < 0.01) {
+                    // Sometimes add a special word horizontally
+                    const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                    const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                    rowContent += `<span style="color:${color}">${word}</span> `;
+                    j += word.length;
+                } else {
+                    // Add regular characters with spacing
+                    if (isChineseRow) {
+                        rowContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + ' ';
+                    } else if (isCyrillicRow) {
+                        rowContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + ' ';
+                    } else {
+                        rowContent += digits.charAt(Math.floor(Math.random() * digits.length)) + ' ';
+                    }
+                }
+            }
+            
+            row.innerHTML = rowContent;
+            matrixContainer.appendChild(row);
+            
+            // Direction (left to right or right to left)
+            const direction = Math.random() < 0.5 ? 1 : -1;
+            const startX = direction > 0 ? -500 : screenWidth;
+            
+            // Animate the row
+            setTimeout(() => {
+                let position = startX;
+                const interval = setInterval(() => {
+                    position += speed * direction;
+                    row.style.left = position + 'px';
+                    
+                    // If the row has moved off-screen, reset it
+                    if ((direction > 0 && position > screenWidth) || 
+                        (direction < 0 && position < -500)) {
+                        
+                        // Regenerate row content
+                        let newRowContent = '';
+                        for (let j = 0; j < charCount; j++) {
+                            if (j > 0 && j < charCount - 1 && Math.random() < 0.01) {
+                                const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                                const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                                newRowContent += `<span style="color:${color}">${word}</span> `;
+                                j += word.length;
+                            } else {
+                                if (isChineseRow) {
+                                    newRowContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + ' ';
+                                } else if (isCyrillicRow) {
+                                    newRowContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + ' ';
+                                } else {
+                                    newRowContent += digits.charAt(Math.floor(Math.random() * digits.length)) + ' ';
+                                }
+                            }
+                        }
+                        row.innerHTML = newRowContent;
+                        position = direction > 0 ? -500 : screenWidth;
+                    }
+                }, 50);
+            }, delay);
+        }
+        
+        function createMatrixColumn(index) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            
+            // Random properties for this column
+            const x = (index * 20) + Math.random() * 10; // Position
+            const speed = 1 + Math.random() * 3; // Drop speed
+            const length = 10 + Math.floor(Math.random() * 25); // Length of the column
+            const delay = Math.random() * 10000; // Initial delay
+            
+            // Random starting position - spread across screen height
+            const startPosition = Math.floor(Math.random() * screenHeight * 1.5) - screenHeight;
+            
+            // Decide column type (Chinese, Cyrillic, or digits)
+            const isChineseColumn = Math.random() < 0.2;
+            const isCyrillicColumn = !isChineseColumn && Math.random() < 0.25; // 25% chance of remaining columns
+            
+            column.style.left = `${x}px`;
+            column.style.top = `${startPosition}px`;
+            
+            // Random font size to create depth illusion (between 10px and 18px)
+            const fontSize = 10 + Math.floor(Math.random() * 9);
+            column.style.fontSize = `${fontSize}px`;
+            
+            // Adjust opacity based on font size to enhance depth effect
+            const opacity = 0.7 + ((fontSize - 10) / 8) * 0.3; // 0.7 to 1.0
+            column.style.opacity = opacity;
+            
+            // Generate column content
+            let columnContent = '';
+            for (let j = 0; j < length; j++) {
+                // Every now and then, insert a special word
+                if (j > 0 && j < length - 1 && Math.random() < 0.02) {
+                    const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                    const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                    columnContent += `<span class="special-word" style="color:${color}">${word}</span>`;
+                    j += 2; // Skip a few positions
+                } else {
+                    // Otherwise use regular digits, Chinese characters, or Cyrillic
+                    if (isChineseColumn) {
+                        columnContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + '<br>';
+                    } else if (isCyrillicColumn) {
+                        columnContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + '<br>';
+                    } else {
+                        columnContent += digits.charAt(Math.floor(Math.random() * digits.length)) + '<br>';
+                    }
+                }
+            }
+            
+            column.innerHTML = columnContent;
+            matrixContainer.appendChild(column);
+            
+            // Animate the column
+            setTimeout(() => {
+                let position = startPosition;
+                const interval = setInterval(() => {
+                    position += speed;
+                    column.style.top = position + 'px';
+                    
+                    // If the column has moved off-screen, reset it
+                    if (position > screenHeight) {
+                        // Regenerate column content
+                        columnContent = '';
+                        for (let j = 0; j < length; j++) {
+                            if (j > 0 && j < length - 1 && Math.random() < 0.02) {
+                                const word = specialWords[Math.floor(Math.random() * specialWords.length)];
+                                const color = wordColors[Math.floor(Math.random() * wordColors.length)];
+                                columnContent += `<span class="special-word" style="color:${color}">${word}</span>`;
+                                j += 2;
+                            } else {
+                                if (isChineseColumn) {
+                                    columnContent += chineseChars.charAt(Math.floor(Math.random() * chineseChars.length)) + '<br>';
+                                } else if (isCyrillicColumn) {
+                                    columnContent += cyrillicChars.charAt(Math.floor(Math.random() * cyrillicChars.length)) + '<br>';
+                                } else {
+                                    columnContent += digits.charAt(Math.floor(Math.random() * digits.length)) + '<br>';
+                                }
+                            }
+                        }
+                        column.innerHTML = columnContent;
+                        position = -100 * length;
+                    }
+                }, 50);
+            }, delay);
+        }
+    </script>
+</body>
+</html> 
